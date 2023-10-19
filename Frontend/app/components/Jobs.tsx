@@ -6,7 +6,7 @@ interface JobsProps {
   searchQuery: string;
 }
 
-const url = "http://localhost:3000/jobs"
+const url = "https://job-portal-backend-oy7g.onrender.com/jobs"
 
 const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
   const [jobs, setJobs] = useState([])
