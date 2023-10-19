@@ -57,6 +57,9 @@ func insertUser(user models.User) {
 
 func updateUser(userID string, updatedUser models.User) error {
 	id, err := primitive.ObjectIDFromHex(userID)
+	if err != nil {
+		log.Fatal(err)
+	}
 	filter := bson.M{"_id": id}
 	update := bson.M{"$set": bson.M{
 		  "first": updatedUser.Title, 
@@ -64,6 +67,7 @@ func updateUser(userID string, updatedUser models.User) error {
 		  "year": updatedUser.Year,
 		  "url": updatedUser.Url,
 		  "location": updatedUser.Location,
+		  "company": updatedUser.Company,
 		},
 	  }
 

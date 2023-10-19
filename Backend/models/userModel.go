@@ -11,4 +11,5 @@ type User struct {
 	Year string `json:"year,omitempty"`
 	Url string `json:"url,omitempty"`
 	Location string `json:"location,omitempty"`
+	Company string `json:"company,omitempty"`
 }
