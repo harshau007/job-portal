@@ -12,7 +12,7 @@ const Page: React.FC = () => {
   };
 
   return (
-    <div className="app">
+    <div className="app no-scrollbar">
       <Navbar />
       <div className="container mx-auto">
         <SearchBar onSearch={handleSearch} />
