@@ -16,7 +16,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
-            "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2OTc3OTk3OTZ9.Wvak6ZCX6mj28NW-1DM3khIdqEJCovfZ_LmY3R0onYg", //Generate new token after 6hrs
+            "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjg5MjI0NTR9.ZgmtLF5FQaEnFfDF0ibwf_OC3mlO29s3rHZNy99zrqQ", //Generate new token after 6hrs
             crossDomain: true
         }
     }).then(response => {
