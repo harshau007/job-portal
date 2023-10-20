@@ -76,7 +76,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
 
   return (
     <div className="container mx-auto px-3">
-      <div className="grid grid-cols-1 md:grid-cols-4 py-4 gap-y-4 md:gap-x-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 py-4 gap-y-4 md:gap-x-4 no-scrollbar">
         {jobs.map(job => (
           <div key={job['_id']} className="bg-[#121212] w-full rounded-lg p-4 text-white">
             <div>
