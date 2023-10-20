@@ -78,7 +78,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
     <div className="container mx-auto px-3">
       <div className="grid grid-cols-1 md:grid-cols-4 py-4 space-y-4 md:space-y-0 md:space-x-4">
         {jobs.map(job => (
-          <div key={job['_id']} className="bg-[#121212] w-full md:w-1/4 rounded-lg p-4 text-white">
+          <div key={job['_id']} className="bg-[#121212] w-full rounded-lg p-4 text-white">
             <div>
               <h2 className="text-xl font-semibold">{job['title']}</h2>
               <p className="text-gray-500 text-sm mt-1">{job['year']}</p>
