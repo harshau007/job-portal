@@ -7,6 +7,7 @@ interface JobsProps {
 }
 
 const url = "https://job-portal-backend-oy7g.onrender.com/jobs"
+const token = process.env.API_KEY
 
 const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
   const [jobs, setJobs] = useState([])
@@ -16,7 +17,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
         headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
-            "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3Mjg5MjI0NTR9.ZgmtLF5FQaEnFfDF0ibwf_OC3mlO29s3rHZNy99zrqQ", //Generate new token after 6hrs
+            "Token": token,
             crossDomain: true
         }
     }).then(response => {
