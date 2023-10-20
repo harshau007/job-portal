@@ -2,6 +2,7 @@ package jwt
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -10,7 +11,7 @@ import (
 
 
 var SECRET = []byte("Test")
-var api_key = "harsh"
+// var api_key = "harsh"
 
 func CreateJWT() (string, error) {
 
@@ -18,7 +19,7 @@ func CreateJWT() (string, error) {
 
 	claims := token.Claims.(jwt.MapClaims)
 
-	claims["exp"] = time.Now().Add(time.Hour * 6).Unix()
+	claims["exp"] = time.Now().Add(time.Hour * 8640).Unix()
 
 	tokenStr, err := token.SignedString(SECRET)
 
@@ -32,9 +33,13 @@ func CreateJWT() (string, error) {
 
 func ValidateJWT(nx func(w http.ResponseWriter, r* http.Request)) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-
-		if r.Header["Token"] != nil {
-			token, err := jwt.Parse(r.Header["Token"][0], func(t *jwt.Token) (interface{}, error) {
+		cookie, err := r.Cookie("Token")
+		if err != nil {
+			log.Fatal(err)
+		}
+		tokenstr := cookie.Value
+		if tokenstr != "" {
+			token, err := jwt.Parse(tokenstr, func(t *jwt.Token) (interface{}, error) {
 				_, ok := t.Method.(*jwt.SigningMethodHMAC)
 				if !ok {
 					w.WriteHeader(http.StatusUnauthorized)
@@ -59,15 +64,29 @@ func ValidateJWT(nx func(w http.ResponseWriter, r* http.Request)) http.Handler {
 }
 
 func GetJWT(w http.ResponseWriter, r *http.Request) {
-	if r.Header["Access"] != nil {
-		if r.Header["Access"][0] != api_key {
-			return
-		} else {
-			token, err := CreateJWT()
-			if err != nil {
-				return
-			}
-			fmt.Fprint(w, token)
-		}
+	// if r.Header["Access"] != nil {
+	// 	if r.Header["Access"][0] != api_key {
+	// 		return
+	// 	} else {
+	// 		token, err := CreateJWT()
+	// 		http.SetCookie(w, &http.Cookie{
+	// 			Name: "Token",
+	// 			Value: token,
+	// 		})
+	// 		if err != nil {
+	// 			return
+	// 		}
+	// 		fmt.Fprint(w, token)
+	// 	}
+	// }
+	
+	token, err := CreateJWT()
+	http.SetCookie(w, &http.Cookie{
+		Name: "Token",
+		Value: token,
+	})
+	if err != nil {
+		return
 	}
+	fmt.Fprint(w, token)
 }
