@@ -84,7 +84,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
               <p className="text-gray-500 text-sm mt-1">{job['year']}</p>
               <p className="text-gray-500 text-sm mt-1">{job['company']}</p>
               <p className="text-gray-500 text-sm mt-1">{job['location']}</p>
-              <p className="mt-6 text-sm lg:text-justify md:text-center text-justify" style={{ height: '12rem', overflow: 'hidden' }}>
+              <p className="mt-6 text-sm lg:text-justify md:text-center text-justify" style={{ height: '12rem', overflow: 'scroll' }}>
                 {job['desc']}
               </p>
             </div>
