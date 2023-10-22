@@ -122,6 +122,7 @@ func getAllUsers() []primitive.M {
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Allow-Control-Allow-Methods", "POST")
 
 	var user models.User
@@ -133,6 +134,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Allow-Control-Allow-Methods", "PUT")
 
   // Get user ID from URL param
@@ -153,12 +155,14 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 
 func GetAllUser(w http.ResponseWriter,r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	allUsers := getAllUsers()
 	json.NewEncoder(w).Encode(allUsers)
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Allow-Control-Allow-Methods", "DELETE")
 
 	params := chi.URLParam(r, "id")
@@ -168,6 +172,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 
 func DeleteAllUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 	w.Header().Set("Allow-Control-Allow-Methods", "DELETE")
 
 	count := deleteAllUsers()
