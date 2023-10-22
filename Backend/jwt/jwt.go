@@ -2,15 +2,26 @@ package jwt
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/joho/godotenv"
 )
 
+var SECRET = ""
+var api_key = ""
 
-var SECRET = []byte("Test")
-var api_key = "harsh"
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(err)
+	}
+	SECRET = os.Getenv("SECRET")
+	api_key = os.Getenv("API_KEY")
+}
 
 func CreateJWT() (string, error) {
 
@@ -20,7 +31,7 @@ func CreateJWT() (string, error) {
 
 	claims["exp"] = time.Now().Add(time.Hour * 8640).Unix()
 
-	tokenStr, err := token.SignedString(SECRET)
+	tokenStr, err := token.SignedString([]byte(SECRET))
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -39,7 +50,7 @@ func ValidateJWT(nx func(w http.ResponseWriter, r* http.Request)) http.Handler {
 					w.WriteHeader(http.StatusUnauthorized)
 					w.Write([]byte("not authorized"))
 				}
-				return SECRET, nil
+				return []byte(SECRET), nil
 			})
 
 			if err != nil {
@@ -63,11 +74,6 @@ func GetJWT(w http.ResponseWriter, r *http.Request) {
 			return
 		} else {
 			token, err := CreateJWT()
-			http.SetCookie(w, &http.Cookie{
-				Name: "Token",
-				Value: token,
-				Path: "/",
-			})
 			if err != nil {
 				return
 			}
