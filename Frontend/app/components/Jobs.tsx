@@ -77,7 +77,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
 
   return (
     <div className="container mx-auto px-3">
-      <div className="grid grid-cols-1 md:grid-cols-4 py-4 gap-y-4 md:gap-x-4 no-scrollbar">
+      <div className="grid grid-cols-1 md:grid-cols-4 py-4 gap-y-4 md:gap-x-4">
         {jobs.map(job => (
           <div key={job['_id']} className="bg-[#121212] w-full rounded-lg p-4 text-white">
             <div>
@@ -85,7 +85,7 @@ const Jobs: React.FC<JobsProps> = ({ searchQuery }) => {
               <p className="text-gray-500 text-sm mt-1">{job['year']}</p>
               <p className="text-gray-500 text-sm mt-1">{job['company']}</p>
               <p className="text-gray-500 text-sm mt-1">{job['location']}</p>
-              <p className="mt-6 text-sm lg:text-justify md:text-center text-justify" style={{ height: '12rem', overflow: 'scroll' }}>
+              <p className="mt-6 text-sm lg:text-justify md:text-center text-justify no-scrollbar" style={{ height: '12rem', overflow: 'scroll' }}>
                 {job['desc']}
               </p>
             </div>
